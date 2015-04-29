@@ -6,5 +6,5 @@ Example code for the IG32 Mecanum Wheel Vectoring Robot Platform TP-094-004. Thi
 Updates
 ============
 
-April 29th, 2015
+April 29th, 2015:
 Added a second Arduino source file to provide support for Dimension Engineering Sabertooth motor controllers. 
