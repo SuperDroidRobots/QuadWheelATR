@@ -1,36 +1,47 @@
-/*********************************************************
+//=========================HEADER=============================================================
+/*
+   Quad ATR Mecanum with Sabertooth
+   AUTHOR: Jason Traud
+   DATE: 6/8/2015
+   
+   This firmware demonstrates basic movement routines on a Mecanum ATR with a Sabertooth
+   motor controller.
+   
+   Hardware: 
+   
+     Arduino Uno R3       (MCU-050-000)
+     Programmable Mecanum (TP-095-004) 
+     Sabertooth 2x25      (TE-091-225)
 
-Quad-Wheel Vectoring Robot Example
-Author: Jason Traud  Jason@SDRobots.com
-SuperDroid Robots
-January 6, 2013
+   Connections:    
+     
+     Arduino D3   -   Sabertooth S1 (Serial COM)
+     Arduino D4   -   Sabertooth S2 (Emergency Stop)
+     Arduino Gnd  -   Sabertooth 0V (A common ground is needed for stable communication) 
+     
+   DIP Switch Settings:
+   
+     00 11 11 (Address 128, front)
+     00 10 11 (Address 129, rear)
+     
+   Support:    
+     
+     SuperDroid Robots Support Forum
+       http://www.sdrobots.com/forums/   
+     
+     Vectoring Robot Support Page
+       http://www.superdroidrobots.com/shop/custom.aspx/vectoring-robots/44/  
+   
+             
+			
+   License: CCAv3.0 Attribution-ShareAlike (http://creativecommons.org/licenses/by-sa/3.0/)
+   You're free to use this code for any venture. Attribution is greatly appreciated. 
+//============================================================================================
+*/
 
-This code uses an Arduino Uno mounted on a Quad-Wheel Vectoring platform. 
-The robot commands two Sabertooth motor controllers to control four independent 
-mecanum omni-directional wheels. 
-
-The goal of this firmware is to cycle through the possible motor movements
-to provide a base for future autonomous routines. 
-
-Platform:
-IG32 Heavy Mecanum Wheel Vectoring Robot Platform
-
-Motor Controller:
-Sabertooth Dual 12A Motor Driver (TE-091-212)
-http://www.superdroidrobots.com/shop/item.aspx/sabertooth-dual-12a-motor-driver/1155/
-
-DIP Switch Settings - 00 11 11 (Address 128, front), 00 10 11 (Address 129, rear)
-
-Vectoring Robot Support Pages:
-http://www.superdroidrobots.com/shop/custom.aspx/vectoring-robots/44/
-http://www.sdrobots.com/ugv-system-design-practical-approach/
-
-Sabertooth Motor Controller Documentation:
-http://www.dimensionengineering.com/software/SabertoothArduinoLibrary/html/
-
-***********************************************************/
-
-// Libraries for the motor controllers
+// ****************************************************
+// Libraries
+// ****************************************************
 #include <SoftwareSerial.h>
 #include <Sabertooth.h>
 
@@ -43,7 +54,7 @@ http://www.dimensionengineering.com/software/SabertoothArduinoLibrary/html/
 // Declaration of the software serial UART and motor controller objects
 SoftwareSerial SWSerial(2, 3); // RX on pin 2 (unused), TX on pin 3 (to S1).
 Sabertooth frontSaber(128, SWSerial); // Address 128, front motors, 1 = left, 2 = right
-Sabertooth rearSaber(129, SWSerial); // Address 130, rear motors, 1 = left, 2 = right
+Sabertooth rearSaber(129, SWSerial);  // Address 130, rear motors, 1 = left, 2 = right
 
 
 //******************************************************************************
@@ -65,7 +76,7 @@ void setup()
   
   // Initialize GPIO inputs and outputs
   pinMode(sabertoothEstop, OUTPUT);
-  
+ 
   allStop();		// Make sure all motors are stopped for safety
 }
 
